@@ -13,9 +13,10 @@ public class AnimatedSprite : MonoBehaviour
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
+
     private void OnEnable()
     {
-        Invoke(nameof(Animate), 0);
+        Invoke(nameof(Animate), 0f);
     }
 
     private void OnDisable()
@@ -31,9 +32,12 @@ public class AnimatedSprite : MonoBehaviour
         {
             frame = 0;
         }
-        spriteRenderer.sprite = sprites[frame];
+
+        if (frame >= 0 && frame < sprites.Length)
+        {
+            spriteRenderer.sprite = sprites[frame];
+        }
 
         Invoke(nameof(Animate), 1f / GameManager.Instance.gameSpeed);
     }
 }
-
